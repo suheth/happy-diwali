@@ -4,8 +4,276 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Happy Diwali</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: #234;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden; /* Prevent scroll bars */
+            position: relative;
+        }
+
+        .floating {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .decoration {
+            width: 180px;
+            height: 180px;
+            z-index: 2;
+            position: absolute;
+            opacity: 0; /* Initially hidden */
+            transition: opacity 0.5s ease; /* Smooth transition */
+        }
+
+        .lantern {
+            background: url('lantern.gif') center/contain no-repeat;
+        }
+
+        .diya {
+            background: url('diya.gif') center/contain no-repeat;
+        }
+
+        .greeting-text {
+            color: #ffd700;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+            z-index: 2;
+            position: relative;
+        }
+
+        .decoration-container {
+            position: relative;
+            width: 100%;
+            height: 300px;
+            display: flex;
+            justify-content: center;
+        }
+
+        /* Firework Animation */
+        @keyframes firework {
+            0% { 
+                transform: translate(-50%, 60vh);
+                width: 0.5vmin;
+                opacity: 1;
+            }
+            50% { 
+                width: 0.5vmin;
+                opacity: 1;
+            }
+            100% { 
+                width: 45vmin; 
+                opacity: 0; 
+            }
+        }
+
+        .firework,
+        .firework::before,
+        .firework::after {
+            --top: 60vh;
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 0.5vmin;
+            aspect-ratio: 1;
+            background:
+                radial-gradient(circle, #ff0 0.2vmin, #0000 0) 50% 00%,
+                radial-gradient(circle, #ff0 0.3vmin, #0000 0) 00% 50%,
+                radial-gradient(circle, #ff0 0.5vmin, #0000 0) 50% 99%,
+                radial-gradient(circle, #ff0 0.2vmin, #0000 0) 99% 50%,
+                radial-gradient(circle, #ff0 0.3vmin, #0000 0) 80% 90%,
+                radial-gradient(circle, #ff0 0.5vmin, #0000 0) 95% 90%,
+                radial-gradient(circle, #ff0 0.5vmin, #0000 0) 10% 60%,
+                radial-gradient(circle, #ff0 0.2vmin, #0000 0) 31% 80%,
+                radial-gradient(circle, #ff0 0.3vmin, #0000 0) 80% 10%,
+                radial-gradient(circle, #ff0 0.2vmin, #0000 0) 90% 23%,
+                radial-gradient(circle, #ff0 0.3vmin, #0000 0) 45% 20%,
+                radial-gradient(circle, #ff0 0.5vmin, #0000 0) 13% 24%;
+            background-size: 0.5vmin 0.5vmin;
+            background-repeat: no-repeat;
+            animation: firework 2s infinite;
+        }
+
+        .firework::before {
+            transform: translate(-50%, -50%) rotate(25deg) !important; 
+        }
+
+        .firework::after {
+            transform: translate(-50%, -50%) rotate(-37deg) !important;
+        }
+
+        /* Multiple fireworks with different positions and delays */
+        .firework:nth-child(1) { left: 25%; animation-delay: 0s; }
+        .firework:nth-child(2) { left: 75%; animation-delay: 0.5s; }
+        .firework:nth-child(3) { left: 50%; animation-delay: 1s; }
+        .firework:nth-child(4) { left: 30%; animation-delay: 1.5s; }
+        .firework:nth-child(5) { left: 70%; animation-delay: 2s; }
+
+
+        /* Rocket Styles */
+        .rocket {
+            position: absolute;
+            width: 6px;
+            height: 30px;
+            background: linear-gradient(#FF4444, #880000);
+            transform-origin: bottom;
+            z-index: 3;
+        }
+        .rocket::before {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 10px;
+            height: 10px;
+            background: #FF8800;
+            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+        }
+        .rocket-trail {
+            position: absolute;
+            width: 4px;
+            height: 20px;
+            background: linear-gradient(transparent, #FF4400);
+            bottom: -20px;
+            left: 1px;
+            animation: trail 0.2s infinite;
+        }
+        /* Sparkle effect for explosions */
+        .sparkle {
+            position: absolute;
+            background: gold;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 4;
+        }
+    </style>
 </head>
 <body>
-    Happy Diwali
+    <!-- Fireworks -->
+    <div class="firework"></div>
+    <div class="firework"></div>
+    <div class="firework"></div>
+    <div class="firework"></div>
+    <div class="firework"></div>
+
+    <div class="container position-relative">
+        <div class="decoration-container">
+            <div class="decoration lantern floating"></div>
+            <div class="decoration diya floating"></div>
+        </div>
+        
+        <div class="text-center">
+            <h1 class="display-1 mb-4 greeting-text floating">Happy Diwali</h1>
+            <p class="lead text-white mb-4">May the festival of lights bring joy, prosperity, and happiness to you and your family</p>
+        </div>
+    </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap 5 JS Bundle -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        const decorations = document.querySelectorAll('.decoration');
+        let currentDecoration = 0;
+
+        function changeDecoration() {
+            decorations[currentDecoration].style.opacity = '0'; // Hide current
+            currentDecoration = (currentDecoration + 1) % decorations.length; // Move to next
+            decorations[currentDecoration].style.opacity = '1'; // Show next
+        }
+
+        // Start changing decorations every 2 seconds
+        setInterval(changeDecoration, 2000);
+        
+        // Initially show the first decoration
+        decorations[currentDecoration].style.opacity = '1';
+    </script>
+
+    <script>
+        // Rocket and explosion effects
+        function createRocket(x) {
+            const rocket = document.createElement('div');
+            rocket.className = 'rocket';
+            const trail = document.createElement('div');
+            trail.className = 'rocket-trail';
+            rocket.appendChild(trail);
+            rocket.style.left = x + 'px';
+            rocket.style.bottom = '0';
+            document.body.appendChild(rocket);
+            const angle = (Math.random() * 30) - 15;
+            const height = window.innerHeight * (0.6 + Math.random() * 0.3);
+            rocket.animate([
+                { transform: `rotate(${angle}deg) translateY(0)` },
+                { transform: `rotate(${angle}deg) translateY(-${height}px)` }
+            ], {
+                duration: 300,
+                easing: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)'
+            }).onfinish = () => {
+                createExplosion(
+                    x + Math.sin(angle * Math.PI / 180) * height,
+                    window.innerHeight - height
+                );
+                document.body.removeChild(rocket);
+            };
+        }
+
+        function createExplosion(x, y) {
+            const particles = 30;
+            const colors = ['#ff0', '#FF9933', '#f00', '#0f0', '#FF69B4', '#fff'];
+            for (let i = 0; i < particles; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'sparkle';
+                const size = Math.random() * 4 + 2;
+                particle.style.width = size + 'px';
+                particle.style.height = size + 'px';
+                const angle = (Math.random() * 360) * (Math.PI / 180);
+                const velocity = Math.random() * 200 + 100;
+                const velocityX = Math.cos(angle) * velocity;
+                const velocityY = Math.sin(angle) * velocity;
+                particle.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                particle.style.left = x + 'px';
+                particle.style.top = y + 'px';
+                document.body.appendChild(particle);
+                particle.animate([
+                    { transform: 'translate(0, 0) scale(1)', opacity: 1 },
+                    { transform: `translate(${velocityX}px, ${velocityY}px) scale(0)`, opacity: 0 }
+                ], {
+                    duration: 5000,
+                    easing: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)'
+                }).onfinish = () => {
+                    document.body.removeChild(particle);
+                };
+            }
+        }
+
+        // Click handler for rockets
+        document.addEventListener('click', (e) => {
+            // Launch multiple rockets
+            for (let i = 0; i < 3; i++) {
+                setTimeout(() => {
+                    createRocket(e.clientX + (Math.random() * 100 - 50));
+                }, i * 200);
+            }
+        });
+
+        // Auto launch rockets periodically
+        setInterval(() => {
+            createRocket(Math.random() * window.innerWidth);
+        }, 1000);
+    </script>
+    
 </body>
 </html>
