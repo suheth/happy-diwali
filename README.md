@@ -1,2 +1,2 @@
 # happy-diwali
-PPFAS Diwali
+Diwali Wishes
